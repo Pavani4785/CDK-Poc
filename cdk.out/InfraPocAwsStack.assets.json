@@ -1,0 +1,34 @@
+{
+  "version": "48.0.0",
+  "files": {
+    "35a53bc183aaf4d7fe84d5e5ed06d48f33ef294fa1325c16cf5db800fa6ee72d": {
+      "displayName": "InfraPocAwsStack/Custom::ECRAutoDeleteImagesCustomResourceProvider Code",
+      "source": {
+        "path": "asset.35a53bc183aaf4d7fe84d5e5ed06d48f33ef294fa1325c16cf5db800fa6ee72d",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-5acac1a6": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "35a53bc183aaf4d7fe84d5e5ed06d48f33ef294fa1325c16cf5db800fa6ee72d.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "0e81c4e739a03e8071b4af23446def85855e780dcbe258997e0b9f85faf2950c": {
+      "displayName": "InfraPocAwsStack Template",
+      "source": {
+        "path": "InfraPocAwsStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-3abba487": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "0e81c4e739a03e8071b4af23446def85855e780dcbe258997e0b9f85faf2950c.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

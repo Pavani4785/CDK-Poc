@@ -1,0 +1,985 @@
+{
+ "Resources": {
+  "PocVpc26541646": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/Resource"
+   }
+  },
+  "PocVpcPublicSubnet1Subnet9D062F7D": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/PublicSubnet1/Subnet"
+   }
+  },
+  "PocVpcPublicSubnet1RouteTable15BCADD3": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "PocVpcPublicSubnet1RouteTableAssociation2458B256": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "PocVpcPublicSubnet1RouteTable15BCADD3"
+    },
+    "SubnetId": {
+     "Ref": "PocVpcPublicSubnet1Subnet9D062F7D"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "PocVpcPublicSubnet1DefaultRoute99DACAFC": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "PocVpcIGW3F2D8A7E"
+    },
+    "RouteTableId": {
+     "Ref": "PocVpcPublicSubnet1RouteTable15BCADD3"
+    }
+   },
+   "DependsOn": [
+    "PocVpcVPCGW407758B1"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "PocVpcPublicSubnet2SubnetB8223F0C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/PublicSubnet2/Subnet"
+   }
+  },
+  "PocVpcPublicSubnet2RouteTable7C87890E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "PocVpcPublicSubnet2RouteTableAssociationC3D3BF32": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "PocVpcPublicSubnet2RouteTable7C87890E"
+    },
+    "SubnetId": {
+     "Ref": "PocVpcPublicSubnet2SubnetB8223F0C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "PocVpcPublicSubnet2DefaultRoute4F937092": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "PocVpcIGW3F2D8A7E"
+    },
+    "RouteTableId": {
+     "Ref": "PocVpcPublicSubnet2RouteTable7C87890E"
+    }
+   },
+   "DependsOn": [
+    "PocVpcVPCGW407758B1"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "PocVpcIsolatedSubnet1Subnet398F3F68": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc/IsolatedSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/IsolatedSubnet1/Subnet"
+   }
+  },
+  "PocVpcIsolatedSubnet1RouteTable08294E48": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc/IsolatedSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/IsolatedSubnet1/RouteTable"
+   }
+  },
+  "PocVpcIsolatedSubnet1RouteTableAssociationD9CDB00F": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "PocVpcIsolatedSubnet1RouteTable08294E48"
+    },
+    "SubnetId": {
+     "Ref": "PocVpcIsolatedSubnet1Subnet398F3F68"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/IsolatedSubnet1/RouteTableAssociation"
+   }
+  },
+  "PocVpcIsolatedSubnet2Subnet3349CD83": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc/IsolatedSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/IsolatedSubnet2/Subnet"
+   }
+  },
+  "PocVpcIsolatedSubnet2RouteTable46D421F7": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc/IsolatedSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/IsolatedSubnet2/RouteTable"
+   }
+  },
+  "PocVpcIsolatedSubnet2RouteTableAssociationC329108D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "PocVpcIsolatedSubnet2RouteTable46D421F7"
+    },
+    "SubnetId": {
+     "Ref": "PocVpcIsolatedSubnet2Subnet3349CD83"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/IsolatedSubnet2/RouteTableAssociation"
+   }
+  },
+  "PocVpcIGW3F2D8A7E": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InfraPocAwsStack/PocVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/IGW"
+   }
+  },
+  "PocVpcVPCGW407758B1": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "PocVpcIGW3F2D8A7E"
+    },
+    "VpcId": {
+     "Ref": "PocVpc26541646"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocVpc/VPCGW"
+   }
+  },
+  "PocBucket4D57A3C8": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+       }
+      }
+     ]
+    },
+    "LifecycleConfiguration": {
+     "Rules": [
+      {
+       "ExpirationInDays": 30,
+       "Status": "Enabled"
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocBucket/Resource"
+   }
+  },
+  "PocBucketPolicyABF0460C": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "PocBucket4D57A3C8"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "PocBucket4D57A3C8",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "PocBucket4D57A3C8",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocBucket/Policy/Resource"
+   }
+  },
+  "PocRepo50F55C81": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "EncryptionConfiguration": {
+     "EncryptionType": "KMS"
+    },
+    "ImageScanningConfiguration": {
+     "ScanOnPush": true
+    },
+    "LifecyclePolicy": {
+     "LifecyclePolicyText": "{\"rules\":[{\"rulePriority\":1,\"selection\":{\"tagStatus\":\"any\",\"countType\":\"imageCountMoreThan\",\"countNumber\":10},\"action\":{\"type\":\"expire\"}}]}"
+    },
+    "RepositoryName": "poc-app",
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-images",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocRepo/Resource"
+   }
+  },
+  "PocRepoAutoDeleteImagesCustomResourceC39297CC": {
+   "Type": "Custom::ECRAutoDeleteImages",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomECRAutoDeleteImagesCustomResourceProviderHandler8D89C030",
+      "Arn"
+     ]
+    },
+    "RepositoryName": {
+     "Ref": "PocRepo50F55C81"
+    }
+   },
+   "DependsOn": [
+    "PocRepo50F55C81"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/PocRepo/AutoDeleteImagesCustomResource/Default"
+   }
+  },
+  "CustomECRAutoDeleteImagesCustomResourceProviderRole665F2773": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ecr:BatchDeleteImage",
+          "ecr:DescribeRepositories",
+          "ecr:ListImages",
+          "ecr:ListTagsForResource"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:",
+             {
+              "Ref": "AWS::Partition"
+             },
+             ":ecr:",
+             {
+              "Ref": "AWS::Region"
+             },
+             ":",
+             {
+              "Ref": "AWS::AccountId"
+             },
+             ":repository/*"
+            ]
+           ]
+          }
+         ],
+         "Condition": {
+          "StringEquals": {
+           "ecr:ResourceTag/aws-cdk:auto-delete-images": "true"
+          }
+         }
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/Custom::ECRAutoDeleteImagesCustomResourceProvider/Role"
+   }
+  },
+  "CustomECRAutoDeleteImagesCustomResourceProviderHandler8D89C030": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "35a53bc183aaf4d7fe84d5e5ed06d48f33ef294fa1325c16cf5db800fa6ee72d.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomECRAutoDeleteImagesCustomResourceProviderRole665F2773",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting images in ",
+       {
+        "Ref": "PocRepo50F55C81"
+       },
+       " repository."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomECRAutoDeleteImagesCustomResourceProviderRole665F2773"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/Custom::ECRAutoDeleteImagesCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.35a53bc183aaf4d7fe84d5e5ed06d48f33ef294fa1325c16cf5db800fa6ee72d",
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21QTW+DMAz9LbuHdIVfQDlMOw3B1OsUjNe5QIJiB1Qh/nvFQMtlp/fh92zJqU6zs359MTMn0HZJT41eajHQKTPz14KQ6uU6giq+7bUsVBmanqAOjUXZvMgqFwQ/TdNj9KOXMzsgI+TsX1iVniYjGHe8W0FvUd6M4Gwex9FD5SIGfga0sirO9HIJ0O21g+1Qup7gEe1drwrB66XC0TGJ87+BqNZVVcgueEBVBBY3RLnl/h2V3k3Uor8YRpUzo9RibmRvW+cjyBhkVda1qO98mtJMn7dP35ko8cEKDairHZ+X9Yj6hgEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "InfraPocAwsStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "ExportVpcId": {
+   "Value": {
+    "Ref": "PocVpc26541646"
+   },
+   "Export": {
+    "Name": "VpcId"
+   }
+  },
+  "ExportBucketName": {
+   "Value": {
+    "Ref": "PocBucket4D57A3C8"
+   },
+   "Export": {
+    "Name": "BucketName"
+   }
+  },
+  "ExportEcrRepoName": {
+   "Value": {
+    "Ref": "PocRepo50F55C81"
+   },
+   "Export": {
+    "Name": "EcrRepoName"
+   }
+  },
+  "ExportEcrRepoUri": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      {
+       "Fn::Select": [
+        4,
+        {
+         "Fn::Split": [
+          ":",
+          {
+           "Fn::GetAtt": [
+            "PocRepo50F55C81",
+            "Arn"
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      ".dkr.ecr.",
+      {
+       "Fn::Select": [
+        3,
+        {
+         "Fn::Split": [
+          ":",
+          {
+           "Fn::GetAtt": [
+            "PocRepo50F55C81",
+            "Arn"
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "PocRepo50F55C81"
+      }
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "EcrRepoUri"
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

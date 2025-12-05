@@ -8,16 +8,17 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "synth": "npm run build && cdk synth",
-    "deploy": "npm run build && cdk deploy",
-    "destroy": "npm run build && cdk destroy"
+    "synth": "npm run build && npx cdk synth",
+    "deploy": "npm run build && npx cdk deploy",
+    "destroy": "npm run build && npx cdk destroy"
   },
   "dependencies": {
     "aws-cdk-lib": "^2.136.0",
-    "constructs": "^10.3.0"
+    "constructs": "^10.3.0",
+    "source-map-support": "^0.5.21"
   },
   "devDependencies": {
-    "typescript": "^5.6.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.0"
   }
 }
