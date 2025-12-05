@@ -27,7 +27,7 @@ export class InfraPocAwsStack extends Stack {
     const repo = new ecr.Repository(this, 'PocRepo', {
       repositoryName: 'poc-app',
       imageScanOnPush: true,
-      encryption: ecr.RepositoryEncryption.KMS_MANAGED,
+      encryption: ecr.RepositoryEncryption.KMS,
       // POC-friendly cleanup; for production you typically keep RETAIN:
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteImages: true,
